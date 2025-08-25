@@ -1,0 +1,73 @@
+/* cursos.css */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
+
+.course-list {
+    margin-top: 60px;
+   
+  }
+
+ /* Contenedor que ocupa toda la pantalla */
+.fullscreen-container {
+  display: flex;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+  height: 100%;
+  min-height: 100vh;
+  background: linear-gradient(45deg, #5a3ae7, #7746d1, #ac44e9);
+  background-size: 300% 300%; /* Hace que la animación sea visible */
+  animation: gradientAnimation 5s ease-in-out infinite;
+}
+
+/* Clase específica para tu componente */
+.Resultadosfondo {
+  width: 100%;
+  max-width: 1200px; /* Ajusta este valor según necesites */
+  padding: 20px;
+  box-sizing: border-box;
+}
+  
+  .course-list-item {
+    background-color: #fff;
+    padding: 10px;    
+    margin-top: 60px;
+    margin-bottom:30px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-left: 150px;
+    margin-right:150px;
+    max-width: 1500px;
+
+
+  }
+  
+  .course-list-item p {
+    margin: 10px 0;
+  }
+  
+  .course-list-item hr {
+    margin-top: 40px;
+
+    margin-bottom: 10px;
+    border: 0;
+    border-top: 1px solid #ddd;
+  }
+  
+  @keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+  /* Estilos responsive */
+  @media screen and (max-width: 768px) {
+    .home-container {
+      grid-template-columns: 1fr;
+    }
+ }

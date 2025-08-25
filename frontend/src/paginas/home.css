@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
+
+/* Estilos generales para la página principal */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: 'DM Serif Text', sans-serif;
+    background: linear-gradient(45deg, #5a3ae7, #7746d1, #ac44e9);
+    background-size: 300% 300%;
+    animation: gradientAnimation 7s ease-in-out infinite;
+    text-align: center; /* Alinea el texto centralmente */
+    color: #ffffff; /* Color de texto */
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.content-carousel-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: flex-start; /* Alinea arriba verticalmente */
+    width: 100%;
+    max-width: 1200px;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.mision {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.mision-container {
+    padding: 15px;
+}
+
+.content-container {
+    width: 45%;
+    padding: 15px;
+}
+
+.gif-container {
+    width: 80%;
+    max-width: 800px;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gif-container img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.section-content {
+    font-size: 16px;
+    color: #666;
+    text-align: justify;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Estilos responsive */
+@media screen and (max-width: 768px) {
+    .home-container {
+        grid-template-columns: 1fr;
+    }
+}

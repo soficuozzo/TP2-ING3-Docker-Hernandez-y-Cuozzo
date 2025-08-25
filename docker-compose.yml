@@ -1,0 +1,203 @@
+version: '3.8'
+
+services:
+  # Base de datos MySQL
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root1234
+      MYSQL_DATABASE: users-api
+      MYSQL_PASSWORD: root1234
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root"]
+      timeout: 20s
+      retries: 10
+
+  # Cache Memcached
+  memcached:
+    image: memcached:latest
+    container_name: memcached-container
+    ports:
+      - "11211:11211"
+    networks:
+      - app-network
+
+  # MongoDB para hotels-api
+  mongo:
+    image: mongo:4
+    container_name: mongo-container
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    networks:
+      - app-network
+
+  # RabbitMQ
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbit-container
+    ports:
+      - "5671:5671"
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    networks:
+      - app-network
+
+  # Solr para búsqueda
+  solr:
+    image: solr:latest
+    container_name: solr-container
+    ports:
+      - "8983:8983"
+    volumes:
+      - ./search-api/solr-config:/opt/solr/server/solr/cursos
+    command: solr-create -c curso
+    networks:
+      - app-network
+
+  # NGINX para balancear carga
+  nginx:
+    image: nginx:latest
+    container_name: nginx-container
+    ports:
+      - "8082:8082" 
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - cursos-api
+      - cursos-api1
+    networks:
+      - app-network
+
+  users-api:
+    image: users-api:latest
+    container_name: users-api-container
+    build:
+      context: ./users-api
+      dockerfile: Dockerfile
+    command: /bin/sh -c "sleep 20 && until nc -z mysql 3306; do sleep 1; done && go run main.go"
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysql
+      - memcached
+    environment:
+      - GO111MODULE=on
+      - DB_HOST = mysql
+      - DB_NAME = users-api
+      - DB_USER = root
+      - DB_PASSWORD  =  root1234
+    networks:
+      - app-network
+    restart: on-failure
+
+  # cursos-api
+  cursos-api:
+    image: cursos-api:latest
+    container_name: cursos-api-container
+    build:
+      context: ./cursos-api
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8082"
+    command: /bin/sh -c "sleep 10 && until nc -z rabbitmq 5672; do sleep 1; done && go run main.go"
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - INSTANCE_ID=cursos-api-container-1
+    depends_on:
+      - mongo
+      - rabbitmq
+      - mysql
+    networks:
+      - app-network
+    restart: on-failure
+    volumes:
+      - ./cursos-api:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  cursos-api1:
+    image: cursos-api:latest
+    container_name: cursos-api-container-1
+    build:
+      context: ./cursos-api
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8082"
+    command: /bin/sh -c "sleep 10 && until nc -z rabbitmq 5672; do sleep 1; done && go run main.go"
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - INSTANCE_ID=cursos-api-container-1
+    depends_on:
+      - mongo
+      - rabbitmq
+      - mysql
+    networks:
+      - app-network
+    restart: on-failure
+    volumes:
+      - ./cursos-api:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  # search-api
+  search-api:
+    image: search-api:latest
+    container_name: search-api-container
+    build:
+      context: ./search-api
+    ports:
+      - "8083:8083"
+    command: /bin/sh -c "sleep 10 && until nc -z rabbitmq 5672; do sleep 1; done && go run main.go"
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+    depends_on:
+      - rabbitmq
+      - solr
+    networks:
+      - app-network
+    restart: on-failure
+
+  frontend1:
+    build: ./frontend
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network   
+        
+  admin-api:
+    build:
+      context: ./admin-api
+      dockerfile: Dockerfile
+    ports:
+      - "8086:8086"
+    environment:
+      - PORT=8086
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock 
+    restart: unless-stopped
+
+
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql-data:

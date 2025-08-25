@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
+
+
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    background: linear-gradient(45deg, #5a3ae7, #7746d1, #ac44e9);
+    background-size: 300% 300%; /* Hace que la animación sea visible */
+    animation: gradientAnimation 5s ease-in-out infinite;
+}
+
+.login-form {
+    width: 300px; /* Ancho del formulario */
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    font-family: DM Serif Text    , sans-serif;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #8a5edd;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: DM Serif Text    , sans-serif;
+
+}
+
+button:hover {
+    background-color: #731797;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+  /* Estilos responsive */
+  @media screen and (max-width: 768px) {
+    .home-container {
+      grid-template-columns: 1fr;
+    }
+ }

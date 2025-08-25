@@ -1,0 +1,149 @@
+/* General styles for the carousel and courses */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
+
+.Courses {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    height: 100vh;
+    animation: gradientAnimation 5s ease-in-out infinite;
+    background: linear-gradient(45deg, #5a3ae7, #7746d1, #ac44e9);
+    background-size: 300% 300%; /* Hace que la animación sea visible */
+}
+
+.Course {
+    width: 80%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(216, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Carousel specific styles */
+.carousel .carousel-slider {
+    position: relative;
+    border-radius: 8px;
+}
+
+.carousel .control-arrow,
+.carousel.carousel-slider .control-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    cursor: pointer;
+}
+
+.carousel .control-arrow:hover {
+    opacity: 1;
+}
+
+.carousel .control-prev.control-arrow {
+    left: -20px; /* Ajusta la posición a la izquierda del contenido */
+}
+
+.carousel .control-next.control-arrow {
+    right: -20px; /* Ajusta la posición a la derecha del contenido */
+}
+
+
+.carousel .control-dots {
+    position: relative;
+    z-index: 2;
+}
+
+.carousel .control-dots .dot {
+    background: #310303;
+    box-shadow: rgb(0, 0, 5);
+}
+
+.carousel .control-dots .dot.selected {
+    background: #a089c4;
+}
+
+.carousel .carousel-status {
+    display: none;
+}
+
+.carousel .slide {
+    background: none;
+    text-align: center;
+}
+
+.carousel .slide img {
+    display: inline-block;
+    max-height: 500px;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+/* Custom styles for Curso component */
+.Curso {
+    padding: 10px;
+    font-family: 'DM Serif Text', sans-serif;
+    
+}
+
+.Curso img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.Curso h3 {
+    margin-top: 15px;
+    font-size: 1.5em;
+    color: #5803e0;
+}
+
+.Curso p {
+    font-size: 1em;
+    color: #666;
+}
+
+.inscribirsebutton {
+    width: 45%;
+    padding: 10px;
+    background-color: #8a5edd;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: DM Serif Text    , sans-serif;
+
+}
+
+
+  /* Estilos responsive */
+  @media screen and (max-width: 768px) {
+    .home-container {
+      grid-template-columns: 1fr;
+    }
+ }

@@ -1,0 +1,145 @@
+/* cursos.css */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
+
+.course-list {
+  margin-top: 60px;
+}
+
+/* Contenedor que ocupa toda la pantalla */
+.fullscreen-container {
+  display: flex;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+  height: 100%;
+  font-family: 'DM Serif Text', sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(45deg, #5a3ae7, #7746d1, #ac44e9);
+  background-size: 300% 300%; /* Hace que la animación sea visible */
+  animation: gradientAnimation 5s ease-in-out infinite;
+}
+
+/* Clase específica para tu componente */
+.Resultadosfondo {
+  width: 100%;
+  font-family: 'DM Serif Text', sans-serif;
+  max-width: 1200px; /* Ajusta este valor según necesites */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.course-list-item {
+  background-color: #fff;
+  padding: 10px;
+  margin-top: 60px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1500px;
+  font-family: 'DM Serif Text', sans-serif;
+}
+
+.commentsection {
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 60px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 870px;
+    font-family: 'DM Serif Text', sans-serif;
+}
+
+.course-list-item p {
+  margin: 10px 0;
+}
+
+.course-list-item hr {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  border: 0;
+  border-top: 1px solid #ddd;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Estilos responsive */
+@media screen and (max-width: 768px) {
+  .home-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.comentarios {
+  width: 100%;
+  max-width: 1200px; /* Mismo ancho que .Resultadosfondo */
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9; /* Fondo claro para toda la sección de comentarios */
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.comentario {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  background-color: #ffffff; /* Fondo blanco para cada comentario */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave para cada comentario */
+  margin-bottom: 20px; /* Espacio entre comentarios */
+}
+
+.comentario h3 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333333; /* Color de texto para el nombre del usuario */
+  margin: 0;
+  margin-bottom: 8px; /* Espacio debajo del nombre del usuario */
+}
+
+.comentario p {
+  font-size: 14px;
+  color: #666666; /* Color de texto para el comentario */
+  margin: 0;
+}
+
+.comentario hr {
+  border: 0;
+  border-top: 1px solid #e6e6e6; /* Separador claro entre comentarios */
+  margin: 20px 0; /* Espacio arriba y abajo del separador */
+}
+
+.comentario:last-child hr {
+  display: none; /* Ocultar el separador después del último comentario */
+}
+
+.titulocoment {
+  flex-direction: column;
+  padding: 15px;
+  background-color: #ffffff; /* Fondo blanco para cada comentario */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave para cada comentario */
+  margin-bottom: 20px; /* Espacio entre comentarios */
+}
+
+.curso-imagen img {
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
